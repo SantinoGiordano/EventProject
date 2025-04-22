@@ -1,9 +1,10 @@
-
+import Nav from "../components/Nav";
 
 export default function Home() {
   return (
-    <div>
-        Hello
-    </div>
+    <>
+      <Nav />
+      <div >Hello</div>
+    </>
   );
 }
