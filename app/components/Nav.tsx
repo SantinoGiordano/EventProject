@@ -3,7 +3,7 @@ import React from "react";
 
 const Nav = () => {
   return (
-    <div className="fixed top-0 left-0 w-full bg-orange-100 h-16 shadow-md flex items-center justify-between px-6 z-50">
+    <div className="fixed top-0 left-0 w-full bg-orange-200 h-16 shadow-md flex items-center justify-between px-6 z-50">
       <div className="text-xl font-bold text-black">Events</div>
       <div className="space-x-6 flex">
         <Link href="/">
