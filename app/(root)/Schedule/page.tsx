@@ -22,7 +22,7 @@ const ScheduleList = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-[url('/cardboard-texture.jpg')] bg-cover bg-center p-10">
+    <div className=" pt-22 min-h-screen bg-[url('/cardboard-texture.jpg')] bg-cover bg-center p-10">
       <h2 className="text-4xl font-bold text-center mb-10 text-stone-800 drop-shadow">
         📌 Today’s Schedule
       </h2>
