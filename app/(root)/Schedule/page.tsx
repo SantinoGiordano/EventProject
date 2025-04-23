@@ -1,3 +1,5 @@
+'use client'
+
 import { Schedule } from '@/app/types/schedule';
 import { useEffect, useState } from 'react';
 
