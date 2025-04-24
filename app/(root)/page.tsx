@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <>
       <div className="pt-18" />
-      <div className="bg-orange-50 min-h-screen flex justify-center items-start">
+      <div className="bg-orange-50 flex justify-center items-start">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 p-10 w-full max-w-7xl">
           <div className="w-full text-center">
             <h3 className="text-3xl font-semibold mb-2 text-stone-700">
@@ -17,7 +17,7 @@ export default function Home() {
               height={300}
               className="rounded-md shadow-md w-full h-auto"
             />
-           <p className="mt-4 text-stone-600 text-base leading-relaxed text-justify">
+            <p className="mt-4 text-stone-600 text-base leading-relaxed text-justify">
               Maximize your study sessions with smart scheduling. This planner
               app helps you stay focused, break down your tasks, and track
               progress—so you’re always learning efficiently and never cramming
@@ -57,6 +57,39 @@ export default function Home() {
               your shopping trips become organized, stress-free, and efficient.
               Whether it’s groceries or gifts, you’ll always be a step ahead.
             </p>
+          </div>
+        </div>
+      </div>
+      <hr />
+      <div className="bg-white py-12 px-6 md:px-20">
+        <h2 className="text-4xl font-bold text-stone-800 mb-6 text-center">
+          Creating Events
+        </h2>
+        <div className="max-w-4xl mx-auto">
+          <p className="text-lg text-stone-700 leading-relaxed text-justify">
+            With our intuitive scheduling feature, you can easily map out your
+            entire day—whether it’s classes, work meetings, errands, or personal
+            time. Our user-friendly interface makes it simple to create, edit,
+            and manage events with just a few clicks. Color-coded tasks help you
+            visualize your day at a glance, while smart notifications ensure you
+            never miss a beat. Whether you’re balancing a hectic school schedule
+            or juggling multiple deadlines at work, this planner adapts to your
+            lifestyle. You can break your day into manageable chunks, prioritize
+            tasks, and even block off time for breaks or self-care. Simply
+            select your tasks, assign time slots, and let the planner organize
+            everything for you. No more juggling sticky notes or forgetting
+            important to-dos—our site keeps your schedule clear, connected, and
+            totally customizable. It’s your time, your way—planned with purpose
+            and designed for productivity.
+          </p>
+          <div className="mt-8 flex justify-center">
+            <Image
+              src="/create.jpg"
+              alt="Create image"
+              width={600}
+              height={300}
+              className="rounded-md shadow-md w-full max-w-xl h-auto"
+            />
           </div>
         </div>
       </div>
