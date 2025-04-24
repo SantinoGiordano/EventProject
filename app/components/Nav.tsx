@@ -12,7 +12,7 @@ const Nav = () => {
         <Link href="/createEvent">
           <span className="text-black text-xl  hover:text-orange-500 transition font-medium">Create Event</span>
         </Link>
-        <Link href="/Schedule">
+        <Link href="/Planner">
           <span className="text-black text-xl  hover:text-orange-500 transition font-medium">Planer</span>
         </Link>
       </div>
