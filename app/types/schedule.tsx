@@ -1,8 +1,8 @@
-export interface Schedule {
-  _id: string;
+export type Schedule ={
+  _id: string,
   name: string;
-  time: Date;
   status: boolean;
+  time?: Date;
   location?: string;
   price?: number;
-}
+};
