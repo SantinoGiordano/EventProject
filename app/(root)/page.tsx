@@ -61,7 +61,7 @@ export default function Home() {
         </div>
       </div>
       <hr />
-      <div className="bg-white py-12 px-6 md:px-20">
+      <div className="bg-orange-50 py-12 px-6 md:px-20">
         <h2 className="text-4xl font-bold text-stone-800 mb-6 text-center">
           Creating Events
         </h2>
