@@ -21,7 +21,7 @@ export default function CreateEvent() {
     };
 
     try {
-      const response = await fetch("http://localhost:8080/api/addevent/", {
+      const response = await fetch("http://localhost:8080/api/addevent", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(event),
