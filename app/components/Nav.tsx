@@ -3,6 +3,7 @@ import React from "react";
 
 const Nav = () => {
   return (
+    <div className="font-monterey text-2xl">
     <div className="fixed top-0 left-0 w-full bg-gradient-to-r from-orange-200 via-orange-100 to-orange-200 h-16 shadow-lg flex items-center justify-between px-8 z-50">
       <div className="text-2xl font-extrabold text-orange-600 tracking-wide">Eventify</div>
       <div className="space-x-8 flex">
@@ -22,6 +23,7 @@ const Nav = () => {
           </span>
         </Link>
       </div>
+    </div>
     </div>
   );
 };
