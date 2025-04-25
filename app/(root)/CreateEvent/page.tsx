@@ -97,7 +97,7 @@ export default function CreateEvent() {
           type="submit"
           className="w-full bg-orange-500 text-white py-3 rounded-lg text-lg font-semibold hover:bg-orange-600 transition duration-300"
         >
-          Create Event of test
+          Create Event
         </button>
       </form>
     </div>
