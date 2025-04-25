@@ -2,6 +2,7 @@
 
 import { Schedule } from "@/app/types/schedule";
 import { useEffect, useState } from "react";
+import { CheckSquare, Trash2 } from "lucide-react";
 
 const ScheduleList = () => {
   const [schedules, setSchedules] = useState<Schedule[]>([]);
@@ -49,13 +50,26 @@ const ScheduleList = () => {
                 index % 2 === 0 ? "rotate-1" : "-rotate-2"
               } hover:rotate-0 transition duration-300 ease-in-out`}
             >
-              <h3 className="text-xl font-bold text-stone-900 mb-2">
-                {item.name}
-              </h3>
-              <p>
-                <strong>🕒 Time:</strong>{" "}
-                {new Date(item.time).toLocaleTimeString()}
-              </p>
+              <div className="flex justify-between items-start">
+                <h3 className="text-xl font-bold text-stone-900 mb-2">
+                  {item.name}
+                </h3>
+                <div className="flex gap-2">
+                  <button className="text-green-600 hover:text-green-800 transition">
+                    <CheckSquare size={20} />
+                  </button>
+                  <button className="text-red-600 hover:text-red-800 transition">
+                    <Trash2 size={20} />
+                  </button>
+                </div>
+              </div>
+
+              {item.time && (
+                <p>
+                  <strong>🕒 Time:</strong> {new Date(item.time).toLocaleString()}
+                </p>
+              )}
+
               <p>
                 <strong>Status:</strong>{" "}
                 {item.status ? "✅ Active" : "❌ Inactive"}
