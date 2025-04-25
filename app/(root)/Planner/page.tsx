@@ -27,6 +27,26 @@ const ScheduleList = () => {
     fetchSchedules();
   }, []);
 
+  const RemoveEvent = async (id: string) => {
+    try {
+      const res = await fetch("http://localhost:8080/api/removeevent", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ _id: id }),
+      });
+
+      if (!res.ok) throw new Error("Failed to delete");
+
+      // Update the local state
+      setSchedules((prev) => prev.filter((schedule) => schedule._id !== id));
+    } catch (err) {
+      console.error("Error deleting event:", err);
+      alert("Failed to delete the event.");
+    }
+  };
+
   return (
     <div className="pt-22 min-h-screen bg-[url('/cardboard.jpg')] bg-fixed bg-cover bg-center p-10">
       <h2 className="text-4xl font-bold text-center mb-10 text-white drop-shadow">
@@ -58,7 +78,10 @@ const ScheduleList = () => {
                   <button className="text-green-600 hover:text-green-800 transition">
                     <CheckSquare size={20} />
                   </button>
-                  <button className="text-red-600 hover:text-red-800 transition">
+                  <button
+                    className="text-red-600 hover:text-red-800 transition"
+                    onClick={() => RemoveEvent(item._id)}
+                  >
                     <Trash2 size={20} />
                   </button>
                 </div>
@@ -66,7 +89,8 @@ const ScheduleList = () => {
 
               {item.time && (
                 <p>
-                  <strong>🕒 Time:</strong> {new Date(item.time).toLocaleString()}
+                  <strong>🕒 Time:</strong>{" "}
+                  {new Date(item.time).toLocaleString()}
                 </p>
               )}
 
