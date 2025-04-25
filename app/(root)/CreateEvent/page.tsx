@@ -1,5 +1,6 @@
 "use client";
 
+import { APIEVENT_URI } from "@/utils/env";
 import { useState } from "react";
 
 export default function CreateEvent() {
@@ -21,7 +22,7 @@ export default function CreateEvent() {
     };
 
     try {
-      const response = await fetch("http://localhost:8080/api/addevent", {
+      const response = await fetch(`${APIEVENT_URI}/api/addevent`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(event),
