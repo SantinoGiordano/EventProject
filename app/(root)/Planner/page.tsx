@@ -4,6 +4,7 @@ import { Schedule } from "@/app/types/schedule";
 import { useEffect, useState } from "react";
 import { CheckSquare, Trash2 } from "lucide-react";
 import { APIEVENT_URI } from "@/utils/env";
+import SortButton from "@/app/components/SortButton";
 
 const ScheduleList = () => {
   const [schedules, setSchedules] = useState<Schedule[]>([]);
@@ -59,7 +60,6 @@ const ScheduleList = () => {
 
       if (!res.ok) throw new Error("Failed to update status");
 
-      // Update local state
       setSchedules((prev) =>
         prev.map((item) =>
           item._id === id ? { ...item, status: !currentStatus } : item
@@ -72,9 +72,12 @@ const ScheduleList = () => {
 
   return (
     <div className="pt-22 min-h-screen bg-[url('/cardboard.jpg')] bg-fixed bg-cover bg-center p-10">
-      <h2 className="text-4xl font-bold text-center mb-10 text-white drop-shadow">
-        📌 Today’s Schedule
-      </h2>
+      <div className="flex justify-between items-center mb-10">
+        <h2 className="text-4xl font-bold text-white drop-shadow">
+          Today’s Schedule
+        </h2>
+        <SortButton />
+      </div>
 
       {loading ? (
         <div className="flex justify-center items-center h-64">
