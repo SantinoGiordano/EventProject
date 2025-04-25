@@ -1,0 +1,1 @@
+export const APIEVENT_URI = 'http://localhost:8080'
