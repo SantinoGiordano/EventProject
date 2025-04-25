@@ -39,11 +39,33 @@ const ScheduleList = () => {
 
       if (!res.ok) throw new Error("Failed to delete");
 
-      // Update the local state
       setSchedules((prev) => prev.filter((schedule) => schedule._id !== id));
     } catch (err) {
       console.error("Error deleting event:", err);
       alert("Failed to delete the event.");
+    }
+  };
+
+  const ToggleStatus = async (id: string, currentStatus: boolean) => {
+    try {
+      const res = await fetch("http://localhost:8080/api/updatestatus", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ _id: id, status: !currentStatus }),
+      });
+
+      if (!res.ok) throw new Error("Failed to update status");
+
+      // Update local state
+      setSchedules((prev) =>
+        prev.map((item) =>
+          item._id === id ? { ...item, status: !currentStatus } : item
+        )
+      );
+    } catch (err) {
+      console.error("Failed to toggle status:", err);
     }
   };
 
@@ -75,9 +97,13 @@ const ScheduleList = () => {
                   {item.name}
                 </h3>
                 <div className="flex gap-2">
-                  <button className="text-green-600 hover:text-green-800 transition">
+                  <button
+                    className="text-green-600 hover:text-green-800 transition"
+                    onClick={() => ToggleStatus(item._id, item.status)}
+                  >
                     <CheckSquare size={20} />
                   </button>
+
                   <button
                     className="text-red-600 hover:text-red-800 transition"
                     onClick={() => RemoveEvent(item._id)}
@@ -96,8 +122,9 @@ const ScheduleList = () => {
 
               <p>
                 <strong>Status:</strong>{" "}
-                {item.status ? "✅ Active" : "❌ Inactive"}
+                {item.status ? "✅ Completed" : "❌ Incomplete"}
               </p>
+
               {item.location && (
                 <p>
                   <strong>📍 Location:</strong> {item.location}
