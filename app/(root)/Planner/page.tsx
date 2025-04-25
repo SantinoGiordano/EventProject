@@ -3,6 +3,7 @@
 import { Schedule } from "@/app/types/schedule";
 import { useEffect, useState } from "react";
 import { CheckSquare, Trash2 } from "lucide-react";
+import { APIEVENT_URI } from "@/utils/env";
 
 const ScheduleList = () => {
   const [schedules, setSchedules] = useState<Schedule[]>([]);
@@ -12,7 +13,7 @@ const ScheduleList = () => {
   useEffect(() => {
     const fetchSchedules = async () => {
       try {
-        const res = await fetch("http://localhost:8080/api/schedule");
+        const res = await fetch(`${APIEVENT_URI}/api/schedule`);
         if (!res.ok) throw new Error("Failed to fetch schedule");
         const data = await res.json();
         setSchedules(data);
@@ -29,7 +30,7 @@ const ScheduleList = () => {
 
   const RemoveEvent = async (id: string) => {
     try {
-      const res = await fetch("http://localhost:8080/api/removeevent", {
+      const res = await fetch(`${APIEVENT_URI}/api/removeevent`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -48,7 +49,7 @@ const ScheduleList = () => {
 
   const ToggleStatus = async (id: string, currentStatus: boolean) => {
     try {
-      const res = await fetch("http://localhost:8080/api/updatestatus", {
+      const res = await fetch(`${APIEVENT_URI}/api/updatestatus`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
