@@ -13,7 +13,7 @@ const Nav = () => {
         </Link>
         <Link href="/CreateEvent" passHref>
           <span className="cursor-pointer text-lg text-gray-800 hover:text-orange-600 transition-all duration-200 font-medium">
-            Create Event
+            Create
           </span>
         </Link>
         <Link href="/Planner" passHref>
