@@ -14,11 +14,16 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-
 const monterey = localFont({
-  src: '/fonts/MontereyFLF.ttf',
+  src: [
+    {
+      path: './fonts/MontereyFLF.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+  ],
   display: 'swap',
-  variable: '--font-monterey', // optional, if you want to use it in Tailwind
+  variable: '--font-monterey',
 });
 
 
@@ -36,9 +41,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${monterey.variable} ${geistMono.variable} antialiased`}
-      >
+<body
+  className={`${geistSans.variable} ${monterey.variable} ${geistMono.variable} antialiased`}
+>
         <div className="bg-orange-50">
           <Nav />
           {children}
