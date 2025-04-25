@@ -1,7 +1,7 @@
-"use client";
+'use client'
 
+import React, { useEffect, useState } from "react";
 import { Schedule } from "@/app/types/schedule";
-import { useEffect, useState } from "react";
 import { CheckSquare, Trash2 } from "lucide-react";
 import { APIEVENT_URI } from "@/utils/env";
 import SortButton from "@/app/components/SortButton";
@@ -10,6 +10,9 @@ const ScheduleList = () => {
   const [schedules, setSchedules] = useState<Schedule[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+
+  // For tracking if the items are sorted
+  const [sorted, setSorted] = useState(false);
 
   useEffect(() => {
     const fetchSchedules = async () => {
@@ -29,6 +32,19 @@ const ScheduleList = () => {
     fetchSchedules();
   }, []);
 
+
+  const sortSchedules = () => {
+    const sortedSchedules = [...schedules].sort((a, b) => {
+      const timeA = new Date(a.time ?? 0).getTime();
+      const timeB = new Date(b.time ?? 0).getTime();
+      return sorted ? timeB - timeA : timeA - timeB; // toggle order
+    });
+  
+    setSchedules(sortedSchedules);
+    setSorted(!sorted);
+  };
+  
+  
   const RemoveEvent = async (id: string) => {
     try {
       const res = await fetch(`${APIEVENT_URI}/api/removeevent`, {
@@ -76,7 +92,7 @@ const ScheduleList = () => {
         <h2 className="text-4xl font-bold text-white drop-shadow">
           Today’s Schedule
         </h2>
-        <SortButton />
+        <SortButton onClick={sortSchedules} />
       </div>
 
       {loading ? (
