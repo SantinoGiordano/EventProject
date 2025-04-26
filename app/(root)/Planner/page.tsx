@@ -1,4 +1,4 @@
-'use client'
+"use client";
 
 import React, { useEffect, useState } from "react";
 import { Schedule } from "@/app/types/schedule";
@@ -32,19 +32,17 @@ const ScheduleList = () => {
     fetchSchedules();
   }, []);
 
-
   const sortSchedules = () => {
     const sortedSchedules = [...schedules].sort((a, b) => {
       const timeA = new Date(a.time ?? 0).getTime();
       const timeB = new Date(b.time ?? 0).getTime();
       return sorted ? timeB - timeA : timeA - timeB; // toggle order
     });
-  
+
     setSchedules(sortedSchedules);
     setSorted(!sorted);
   };
-  
-  
+
   const RemoveEvent = async (id: string) => {
     try {
       const res = await fetch(`${APIEVENT_URI}/api/removeevent`, {
@@ -114,8 +112,12 @@ const ScheduleList = () => {
             >
               <div className="flex justify-between items-start">
                 <h3 className="text-xl font-bold text-stone-900 mb-2">
-                  {item.name}
+                  {item.name}{" "}
+                  <span className="text-sm font-medium text-stone-500">
+                    {item.type}
+                  </span>
                 </h3>
+
                 <div className="flex gap-2">
                   <button
                     className="text-green-600 hover:text-green-800 transition"
