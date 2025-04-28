@@ -11,6 +11,7 @@ export default function Home() {
               Studying
             </h3>
             <Image
+              draggable="false"
               src="/studying.jpg"
               alt="Studying"
               width={700}
@@ -29,6 +30,7 @@ export default function Home() {
               Meeting
             </h3>
             <Image
+              draggable="false"
               src="/meeting.jpg"
               alt="Meeting"
               width={400}
@@ -46,6 +48,7 @@ export default function Home() {
               Shopping
             </h3>
             <Image
+              draggable="false"
               src="/shopping.jpg"
               alt="Shopping"
               width={400}
