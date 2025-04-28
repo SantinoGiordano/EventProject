@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import Drawer from "./Drawer";
-import path from "path";
+
 
 const Nav = () => {
   return (
