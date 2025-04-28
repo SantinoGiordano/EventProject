@@ -103,62 +103,82 @@ const ScheduleList = () => {
         </p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {schedules.map((item, index) => (
-            <div
-              key={item._id}
-              className={`bg-yellow-100 border border-yellow-300 p-6 rounded-lg shadow-xl transform ${
-                index % 2 === 0 ? "rotate-1" : "-rotate-2"
-              } hover:rotate-0 transition duration-300 ease-in-out`}
-            >
-              <div className="flex justify-between items-start">
-                <h3 className="text-xl font-bold text-stone-900 mb-2">
-                  {item.name}{" "}
-                  <span className="text-sm font-medium text-stone-500">
-                    {item.type}
-                  </span>
-                </h3>
+          {schedules.map((item, index) => {
+            const getCardColor = (type: string) => {
+              const lowerType = type.toLowerCase();
 
-                <div className="flex gap-2">
-                  <button
-                    className="text-green-600 hover:text-green-800 transition"
-                    onClick={() => ToggleStatus(item._id, item.status)}
-                  >
-                    <CheckSquare size={20} />
-                  </button>
+              if (lowerType === "business") {
+                return "bg-blue-100 border-blue-300";
+              } else if (lowerType === "personal") {
+                return "bg-green-100 border-green-300";
+              } else if (lowerType === "friends") {
+                return "bg-orange-100 border-orange-300";
+              } else if (lowerType === "other") {
+                return "bg-red-100 border-red-300";
+              } else {
+                return "bg-white border-stone-300";
+              }
+            };
 
-                  <button
-                    className="text-red-600 hover:text-red-800 transition"
-                    onClick={() => RemoveEvent(item._id)}
-                  >
-                    <Trash2 size={20} />
-                  </button>
+            return (
+              <div
+                key={item._id}
+                className={`${getCardColor(
+                  item.type
+                )} p-6 rounded-lg shadow-xl border transform ${
+                  index % 2 === 0 ? "rotate-1" : "-rotate-2"
+                } hover:rotate-0 transition duration-300 ease-in-out`}
+              >
+                <div className="flex justify-between items-start">
+                  <h3 className="text-xl font-bold text-stone-900 mb-2">
+                    {item.name}{" "}
+                    <span className="text-sm font-medium text-stone-500">
+                      {item.type}
+                    </span>
+                  </h3>
+
+                  <div className="flex gap-2">
+                    <button
+                      className="text-green-600 hover:text-green-800 transition"
+                      onClick={() => ToggleStatus(item._id, item.status)}
+                    >
+                      <CheckSquare size={20} />
+                    </button>
+
+                    <button
+                      className="text-red-600 hover:text-red-800 transition"
+                      onClick={() => RemoveEvent(item._id)}
+                    >
+                      <Trash2 size={20} />
+                    </button>
+                  </div>
                 </div>
+
+                {item.time && (
+                  <p>
+                    <strong>🕒 Time:</strong>{" "}
+                    {new Date(item.time).toLocaleString()}
+                  </p>
+                )}
+
+                <p>
+                  <strong>Status:</strong>{" "}
+                  {item.status ? "✅ Completed" : "❌ Incomplete"}
+                </p>
+
+                {item.location && (
+                  <p>
+                    <strong>📍 Location:</strong> {item.location}
+                  </p>
+                )}
+                {item.price && (
+                  <p>
+                    <strong>💲 Price:</strong> ${item.price.toFixed(2)}
+                  </p>
+                )}
               </div>
-
-              {item.time && (
-                <p>
-                  <strong>🕒 Time:</strong>{" "}
-                  {new Date(item.time).toLocaleString()}
-                </p>
-              )}
-
-              <p>
-                <strong>Status:</strong>{" "}
-                {item.status ? "✅ Completed" : "❌ Incomplete"}
-              </p>
-
-              {item.location && (
-                <p>
-                  <strong>📍 Location:</strong> {item.location}
-                </p>
-              )}
-              {item.price && (
-                <p>
-                  <strong>💲 Price:</strong> ${item.price.toFixed(2)}
-                </p>
-              )}
-            </div>
-          ))}
+            );
+          })}
         </div>
       )}
     </div>
