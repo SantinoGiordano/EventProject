@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Nav from "./components/Nav";
+import localFont from 'next/font/local';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -12,6 +13,21 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const monterey = localFont({
+  src: [
+    {
+      path: './fonts/MontereyFLF.ttf',
+      weight: '400',
+      style: 'normal',
+    },
+  ],
+  display: 'swap',
+  variable: '--font-monterey',
+});
+
+
+
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -25,9 +41,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+<body
+  className={`${geistSans.variable} ${monterey.variable} ${geistMono.variable} antialiased`}
+>
         <div className="bg-orange-50">
           <Nav />
           {children}

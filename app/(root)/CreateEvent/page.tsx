@@ -1,12 +1,12 @@
 "use client";
 
-import { APIEVENT_URI } from "@/utils/env";
+import { APIEVENT_URI, typeEvent } from "@/utils/env";
 import { useState } from "react";
 
 export default function CreateEvent() {
   const [name, setName] = useState("");
   const [time, setTime] = useState("");
-  const [status, setStatus] = useState(false);
+  const [type, setType] = useState("");
   const [location, setLocation] = useState("");
   const [price, setPrice] = useState("");
 
@@ -15,8 +15,8 @@ export default function CreateEvent() {
 
     const event = {
       name,
+      type,
       time: new Date(time),
-      status,
       location: location || undefined,
       price: price ? parseFloat(price) : undefined,
     };
@@ -47,7 +47,9 @@ export default function CreateEvent() {
         onSubmit={handleSubmit}
         className="w-full max-w-lg bg-white rounded-2xl shadow-lg p-8 space-y-6"
       >
-        <h2 className="text-3xl font-bold text-center text-stone-800">Create Event</h2>
+        <h2 className="text-3xl font-bold text-center text-stone-800">
+          Create Event
+        </h2>
 
         <input
           type="text"
@@ -65,7 +67,21 @@ export default function CreateEvent() {
           required
           className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
         />
-
+        <select
+          value={type}
+          onChange={(e) => setType(e.target.value)}
+          required
+          className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
+        >
+          <option value="text" disabled>
+            Select Event Name
+          </option>
+          {typeEvent.map((option) => (
+            <option key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
         <input
           type="text"
           placeholder="Location (optional)"
@@ -83,15 +99,6 @@ export default function CreateEvent() {
           className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
         />
 
-        <div className="flex items-center space-x-3">
-          <input
-            type="checkbox"
-            checked={status}
-            onChange={(e) => setStatus(e.target.checked)}
-            className="w-5 h-5 text-orange-500 focus:ring-orange-400"
-          />
-          <label className="text-stone-700 text-base">Mark as completed</label>
-        </div>
 
         <button
           type="submit"
