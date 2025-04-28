@@ -97,7 +97,7 @@ const ScheduleList = () => {
         <div className="flex justify-center items-center h-64">
           <span className="loading loading-spinner loading-xl text-black"></span>
         </div>
-      ) : error || schedules.length === 0 ? (
+      ) : error || !schedules || schedules.length === 0 ? ( // ✅ FIXED HERE
         <p className="text-center text-xl text-stone-700">
           🗓️ Nothing planned today
         </p>
