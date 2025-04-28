@@ -1,3 +1,3 @@
-export const APIEVENT_URI = 'http://localhost:8080'
+export const APIEVENT_URI = 'https://eventify-ruby.vercel.app'
 
 export const typeEvent = ['Business','Friends','Personal','other']
