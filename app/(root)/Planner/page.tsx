@@ -17,7 +17,7 @@ const ScheduleList = () => {
   useEffect(() => {
     const fetchSchedules = async () => {
       try {
-        const res = await fetch(`${APIEVENT_URI}/api/schedule`);
+        const res = await fetch(`${APIEVENT_URI}api/schedule`);
         if (!res.ok) throw new Error("Failed to fetch schedule");
         const data = await res.json();
         setSchedules(data);
