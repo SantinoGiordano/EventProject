@@ -80,14 +80,17 @@ const Drawer = () => {
     }
   };
 
-  const getCardColor = (type: string) => {
-    const lowerType = type.toLowerCase();
+  const getCardColor = (type?: string) => {
+    const lowerType = type?.toLowerCase() || "";
+  
     if (lowerType === "business") return "bg-blue-100 border-blue-300";
     if (lowerType === "personal") return "bg-green-100 border-green-300";
     if (lowerType === "friends") return "bg-orange-100 border-orange-300";
     if (lowerType === "other") return "bg-red-100 border-red-300";
-    return "bg-white border-stone-300";
+  
+    return "bg-white border-stone-300"; // default
   };
+  
 
   return (
 <div className="h-full overflow-y-auto">
