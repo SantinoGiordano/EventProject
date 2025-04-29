@@ -1,6 +1,8 @@
+// import { APIEVENT_URI } from "@/utils/env";
 import Image from "next/image";
 
 export default function Home() {
+  // console.log("API URI:", APIEVENT_URI);
   return (
     <>
       <div className="pt-18" />
