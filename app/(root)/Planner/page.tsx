@@ -10,8 +10,6 @@ const ScheduleList = () => {
   const [schedules, setSchedules] = useState<Schedule[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-
-  // For tracking if the items are sorted
   const [sorted, setSorted] = useState(false);
 
   useEffect(() => {
@@ -36,7 +34,7 @@ const ScheduleList = () => {
     const sortedSchedules = [...schedules].sort((a, b) => {
       const timeA = new Date(a.time ?? 0).getTime();
       const timeB = new Date(b.time ?? 0).getTime();
-      return sorted ? timeB - timeA : timeA - timeB; // toggle order
+      return sorted ? timeB - timeA : timeA - timeB;
     });
 
     setSchedules(sortedSchedules);
@@ -84,6 +82,23 @@ const ScheduleList = () => {
     }
   };
 
+  const getCardColor = (type?: string) => {
+    const lowerType = type?.toLowerCase() || "";
+
+    switch (lowerType) {
+      case "business":
+        return "bg-blue-100 border-blue-300";
+      case "personal":
+        return "bg-green-100 border-green-300";
+      case "friends":
+        return "bg-orange-100 border-orange-300";
+      case "other":
+        return "bg-red-100 border-red-300";
+      default:
+        return "bg-white border-stone-300";
+    }
+  };
+
   return (
     <div className="pt-22 min-h-screen bg-[url('/cardboard.jpg')] bg-fixed bg-cover bg-center p-10">
       <div className="flex justify-between items-center mb-10">
@@ -97,29 +112,18 @@ const ScheduleList = () => {
         <div className="flex justify-center items-center h-64">
           <span className="loading loading-spinner loading-xl text-black"></span>
         </div>
-      ) : error || !schedules || schedules.length === 0 ? ( // ✅ FIXED HERE
+      ) : error || !schedules || schedules.length === 0 ? (
         <p className="text-center text-xl text-stone-700">
           🗓️ Nothing planned today
         </p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {schedules.map((item, index) => {
-            const getCardColor = (type: string | undefined) => {
-              const lowerType = typeof type === "string" ? type.toLowerCase() : "";
-            
-              if (lowerType === "business") {
-                return "bg-blue-100 border-blue-300";
-              } else if (lowerType === "personal") {
-                return "bg-green-100 border-green-300";
-              } else if (lowerType === "friends") {
-                return "bg-orange-100 border-orange-300";
-              } else if (lowerType === "other") {
-                return "bg-red-100 border-red-300";
-              } else {
-                return "bg-white border-stone-300";
-              }
-            };
-            
+            // ✅ Defensive guard
+            if (!item || typeof item.type !== "string") {
+              console.warn("Skipping invalid schedule item:", item);
+              return null;
+            }
 
             return (
               <div
