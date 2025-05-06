@@ -104,9 +104,9 @@ const ScheduleList = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {schedules.map((item, index) => {
-            const getCardColor = (type: string) => {
-              const lowerType = type.toLowerCase();
-
+            const getCardColor = (type: string | undefined) => {
+              const lowerType = typeof type === "string" ? type.toLowerCase() : "";
+            
               if (lowerType === "business") {
                 return "bg-blue-100 border-blue-300";
               } else if (lowerType === "personal") {
@@ -119,6 +119,7 @@ const ScheduleList = () => {
                 return "bg-white border-stone-300";
               }
             };
+            
 
             return (
               <div
