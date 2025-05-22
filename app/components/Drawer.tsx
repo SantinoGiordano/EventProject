@@ -80,15 +80,6 @@ const Drawer = () => {
     }
   };
 
-  const getCardColor = (type: string) => {
-    const lowerType = type.toLowerCase();
-    if (lowerType === "business") return "bg-blue-100 border-blue-300";
-    if (lowerType === "personal") return "bg-green-100 border-green-300";
-    if (lowerType === "friends") return "bg-orange-100 border-orange-300";
-    if (lowerType === "other") return "bg-red-100 border-red-300";
-    return "bg-white border-stone-300";
-  };
-
   return (
 <div className="h-full overflow-y-auto">
   <div className="sm:hidden mb-6">
@@ -158,15 +149,11 @@ const Drawer = () => {
             {schedules.map((item) => (
               <div
                 key={item._id}
-                className={`${getCardColor(item.type)} p-4 rounded-lg border`}
               >
                 <div className="flex justify-between items-start">
                   <div>
                     <h3 className="font-bold text-stone-800">
                       {item.name}
-                      <span className="ml-2 text-sm font-medium text-stone-500">
-                        ({item.type})
-                      </span>
                     </h3>
                     {item.time && (
                       <p className="text-sm">
