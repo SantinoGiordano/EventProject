@@ -5,5 +5,4 @@ export type Schedule ={
   time?: Date;
   location?: string;
   price?: number;
-  type: string;
 };
