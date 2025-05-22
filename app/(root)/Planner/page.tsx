@@ -82,23 +82,6 @@ const ScheduleList = () => {
     }
   };
 
-  const getCardColor = (type?: string) => {
-    const lowerType = type?.toLowerCase() || "";
-
-    switch (lowerType) {
-      case "business":
-        return "bg-blue-100 border-blue-300";
-      case "personal":
-        return "bg-green-100 border-green-300";
-      case "friends":
-        return "bg-orange-100 border-orange-300";
-      case "other":
-        return "bg-red-100 border-red-300";
-      default:
-        return "bg-white border-stone-300";
-    }
-  };
-
   return (
     <div className="pt-22 min-h-screen bg-[url('/cardboard.jpg')] bg-fixed bg-cover bg-center p-10">
       <div className="flex justify-between items-center mb-10">
@@ -119,8 +102,7 @@ const ScheduleList = () => {
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {schedules.map((item, index) => {
-            // ✅ Defensive guard
-            if (!item || typeof item.type !== "string") {
+            if (!item || typeof item !== "object") {
               console.warn("Skipping invalid schedule item:", item);
               return null;
             }
@@ -128,18 +110,14 @@ const ScheduleList = () => {
             return (
               <div
                 key={item._id}
-                className={`${getCardColor(
-                  item.type
-                )} p-6 rounded-lg shadow-xl border transform ${
+                className={`
+                p-6 rounded-lg shadow-xl border transform ${
                   index % 2 === 0 ? "rotate-1" : "-rotate-2"
                 } hover:rotate-0 transition duration-300 ease-in-out`}
               >
                 <div className="flex justify-between items-start">
                   <h3 className="text-xl font-bold text-stone-900 mb-2">
                     {item.name}{" "}
-                    <span className="text-sm font-medium text-stone-500">
-                      {item.type}
-                    </span>
                   </h3>
 
                   <div className="flex gap-2">
