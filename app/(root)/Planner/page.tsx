@@ -31,6 +31,11 @@ const ScheduleList = () => {
   }, []);
 
   const sortSchedules = () => {
+    if (!Array.isArray(schedules)) {
+      console.error("schedules is not an array:", schedules);
+      return;
+    }
+
     const sortedSchedules = [...schedules].sort((a, b) => {
       const timeA = new Date(a.time ?? 0).getTime();
       const timeB = new Date(b.time ?? 0).getTime();
@@ -111,7 +116,7 @@ const ScheduleList = () => {
               <div
                 key={item._id}
                 className={`
-                p-6 rounded-lg shadow-xl border transform ${
+                bg-orange-100 p-6 rounded-lg shadow-xl border transform ${
                   index % 2 === 0 ? "rotate-1" : "-rotate-2"
                 } hover:rotate-0 transition duration-300 ease-in-out`}
               >
@@ -137,28 +142,30 @@ const ScheduleList = () => {
                   </div>
                 </div>
 
-                {item.time && (
-                  <p>
-                    <strong>🕒 Time:</strong>{" "}
-                    {new Date(item.time).toLocaleString()}
-                  </p>
-                )}
+                <div className="">
+                  {item.time && (
+                    <p>
+                      <strong>🕒 Time:</strong>{" "}
+                      {new Date(item.time).toLocaleString()}
+                    </p>
+                  )}
 
-                <p>
-                  <strong>Status:</strong>{" "}
-                  {item.status ? "✅ Completed" : "❌ Incomplete"}
-                </p>
+                  <p>
+                    <strong>Status:</strong>{" "}
+                    {item.status ? "✅ Completed" : "❌ Incomplete"}
+                  </p>
 
-                {item.location && (
-                  <p>
-                    <strong>📍 Location:</strong> {item.location}
-                  </p>
-                )}
-                {item.price && (
-                  <p>
-                    <strong>💲 Price:</strong> ${item.price.toFixed(2)}
-                  </p>
-                )}
+                  {item.location && (
+                    <p>
+                      <strong>📍 Location:</strong> {item.location}
+                    </p>
+                  )}
+                  {item.price && (
+                    <p>
+                      <strong>💲 Price:</strong> ${item.price.toFixed(2)}
+                    </p>
+                  )}
+                </div>
               </div>
             );
           })}
