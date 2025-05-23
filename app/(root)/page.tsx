@@ -4,7 +4,7 @@ export default function Home() {
   return (
     <>
       <div className="pt-18" />
-      <div className="bg-orange-50 flex justify-center items-start">
+      <div className=" flex justify-center items-start">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 p-10 w-full max-w-7xl">
           <div className="w-full text-center">
             <h3 className="text-3xl font-semibold mb-2 text-stone-700">
@@ -63,8 +63,9 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <hr />
-      <div className="bg-orange-50 py-12 px-6 md:px-20">
+      <hr className="w-96 h-1 mx-auto my-8 border-0 bg-black rounded" />
+
+      <div className=" py-12 px-6 md:px-20">
         <h2 className="text-4xl font-bold text-stone-800 mb-6 text-center">
           Creating Events
         </h2>
