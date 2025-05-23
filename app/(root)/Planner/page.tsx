@@ -106,69 +106,52 @@ const ScheduleList = () => {
         </p>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {schedules.map((item, index) => {
-            if (!item || typeof item !== "object") {
-              console.warn("Skipping invalid schedule item:", item);
-              return null;
-            }
-
-            return (
-              <div
-                key={item._id}
-                className={`
-                bg-orange-100 p-6 rounded-lg shadow-xl border transform ${
-                  index % 2 === 0 ? "rotate-1" : "-rotate-2"
-                } hover:rotate-0 transition duration-300 ease-in-out`}
+          {schedules.map((item, index) => (
+            <div
+              key={item._id}
+              className={`
+              bg-white p-6 rounded-lg shadow-xl border transform
+              ${index % 2 === 0 ? "rotate-1" : "-rotate-2"}
+              hover:rotate-0 transition duration-300 ease-in-out
+            `}
               >
-                <div className="flex justify-between items-start">
-                  <h3 className="text-xl font-bold text-stone-900 mb-2">
-                    {item.name}{" "}
-                  </h3>
-
-                  <div className="flex gap-2">
-                    <button
-                      className="text-green-600 hover:text-green-800 transition"
-                      onClick={() => ToggleStatus(item._id, item.status)}
-                    >
-                      <CheckSquare size={20} />
-                    </button>
-
-                    <button
-                      className="text-red-600 hover:text-red-800 transition"
-                      onClick={() => RemoveEvent(item._id)}
-                    >
-                      <Trash2 size={20} />
-                    </button>
-                  </div>
-                </div>
-
-                <div className="">
+              <div className="flex justify-between items-start">
+                <div className="space-y-1">
+                  <h3 className="font-semibold text-orange-800">{item.name}</h3>
                   {item.time && (
-                    <p>
-                      <strong>🕒 Time:</strong>{" "}
-                      {new Date(item.time).toLocaleString()}
+                    <p className="text-sm text-gray-600">
+                      🕒{" "}
+                      {new Date(item.time).toLocaleTimeString([], {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
                     </p>
                   )}
-
-                  <p>
-                    <strong>Status:</strong>{" "}
-                    {item.status ? "✅ Completed" : "❌ Incomplete"}
-                  </p>
-
-                  {item.location && (
-                    <p>
-                      <strong>📍 Location:</strong> {item.location}
-                    </p>
-                  )}
-                  {item.price && (
-                    <p>
-                      <strong>💲 Price:</strong> ${item.price.toFixed(2)}
-                    </p>
-                  )}
+                </div>
+                <div className="flex gap-2 mt-1">
+                  <button
+                    title="Toggle Status"
+                    className="text-green-600 hover:bg-green-50 p-1 rounded-full transition"
+                    onClick={() => ToggleStatus(item._id, item.status)}
+                  >
+                    <CheckSquare size={18} />
+                  </button>
+                  <button
+                    title="Delete Event"
+                    className="text-red-600 hover:bg-red-50 p-1 rounded-full transition"
+                    onClick={() => RemoveEvent(item._id)}
+                  >
+                    <Trash2 size={18} />
+                  </button>
                 </div>
               </div>
-            );
-          })}
+              <div className="mt-3 text-sm text-gray-700 space-y-1">
+                <p>{item.status ? "✅ Completed" : "❌ Incomplete"}</p>
+                {item.location && <p>📍 {item.location}</p>}
+                {item.price && <p>💲 ${item.price.toFixed(2)}</p>}
+              </div>
+            </div>
+          ))}
         </div>
       )}
     </div>
