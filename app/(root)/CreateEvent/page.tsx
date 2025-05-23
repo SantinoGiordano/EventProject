@@ -1,12 +1,12 @@
 "use client";
 
-import { APIEVENT_URI, typeEvent } from "@/utils/env";
+import { APIEVENT_URI } from "@/utils/env";
 import { useState } from "react";
+import { CalendarDays, MapPin, DollarSign, Type } from "lucide-react";
 
 export default function CreateEvent() {
   const [name, setName] = useState("");
   const [time, setTime] = useState("");
-  const [type, setType] = useState("");
   const [location, setLocation] = useState("");
   const [price, setPrice] = useState("");
 
@@ -15,7 +15,6 @@ export default function CreateEvent() {
 
     const event = {
       name,
-      type,
       time: new Date(time),
       location: location || undefined,
       price: price ? parseFloat(price) : undefined,
@@ -42,67 +41,74 @@ export default function CreateEvent() {
   };
 
   return (
-    <div className="bg-orange-50 min-h-screen flex items-center justify-center px-4 py-12">
+    <div className="bg-gradient-to-br from-orange-50 to-white min-h-screen flex items-center justify-center px-4 py-16">
       <form
         onSubmit={handleSubmit}
-        className="w-full max-w-lg bg-white rounded-2xl shadow-lg p-8 space-y-6"
+        className="w-full max-w-xl bg-white rounded-3xl shadow-xl p-10 space-y-6 border border-orange-100"
       >
-        <h2 className="text-3xl font-bold text-center text-stone-800">
-          Create Event
+        <h2 className="text-4xl font-extrabold text-center text-stone-800 mb-4">
+          Create New Event
         </h2>
+        <hr className="w-20 h-1 mx-auto bg-black rounded border-0 mb-4" />
 
-        <input
-          type="text"
-          placeholder="Event Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-          required
-          className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
-        />
+        <div className="relative">
+          <Type className="absolute left-3 top-3.5 text-orange-400" size={20} />
+          <input
+            type="text"
+            placeholder="Event Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+            className="w-full pl-10 pr-4 py-3 border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-400"
+          />
+        </div>
 
-        <input
-          type="datetime-local"
-          value={time}
-          onChange={(e) => setTime(e.target.value)}
-          required
-          className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
-        />
-        <select
-          value={type}
-          onChange={(e) => setType(e.target.value)}
-          required
-          className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
-        >
-          <option value="text" disabled>
-            Select Event Name
-          </option>
-          {typeEvent.map((option) => (
-            <option key={option} value={option}>
-              {option}
-            </option>
-          ))}
-        </select>
-        <input
-          type="text"
-          placeholder="Location (optional)"
-          value={location}
-          onChange={(e) => setLocation(e.target.value)}
-          className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
-        />
+        <div className="relative">
+          <CalendarDays
+            className="absolute left-3 top-3.5 text-orange-400"
+            size={20}
+          />
+          <input
+            type="datetime-local"
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
+            required
+            className="w-full pl-10 pr-4 py-3 border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-400"
+          />
+        </div>
 
-        <input
-          type="number"
-          step="0.01"
-          placeholder="Price (optional)"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-          className="w-full px-4 py-3 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-orange-400"
-        />
+        <div className="relative">
+          <MapPin
+            className="absolute left-3 top-3.5 text-orange-400"
+            size={20}
+          />
+          <input
+            type="text"
+            placeholder="Location (optional)"
+            value={location}
+            onChange={(e) => setLocation(e.target.value)}
+            className="w-full pl-10 pr-4 py-3 border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-400"
+          />
+        </div>
 
+        <div className="relative">
+          <DollarSign
+            className="absolute left-3 top-3.5 text-orange-400"
+            size={20}
+          />
+          <input
+            type="number"
+            step="0.01"
+            placeholder="Price (optional)"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            className="w-full pl-10 pr-4 py-3 border border-stone-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-orange-400"
+          />
+        </div>
 
         <button
           type="submit"
-          className="w-full bg-orange-500 text-white py-3 rounded-lg text-lg font-semibold hover:bg-orange-600 transition duration-300"
+          className="w-full bg-orange-500 text-white py-3 rounded-xl text-lg font-semibold hover:bg-orange-600 transition-all duration-300 shadow-md hover:shadow-lg"
         >
           Create Event
         </button>
